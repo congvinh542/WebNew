@@ -1,0 +1,34 @@
+﻿@model WebNews.Models.Account
+@{
+    ViewData["Title"] = "Đăng ký tài khoảng";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdminLogin.cshtml";
+}
+
+<form asp-area="Admin" asp-controller="Accounts" asp-action="Signin" method="post">
+    <div class="signin-box signup">
+        <h2 class="slim-logo"><a href="/">Blog<span>.</span></a></h2>
+        <h3 class="signin-title-primary">Get Started!</h3>
+        <h5 class="signin-title-secondary lh-4">It's free to signup and only takes a minute.</h5>
+
+        <div class="row row-xs mg-b-10">
+
+            <div class="col-sm"><input type="text" asp-for="FullName" class="form-control" placeholder="FullName"></div>
+            <div class="col-sm mg-t-10 mg-sm-t-0"><input type="text" asp-for="Phone" class="form-control" placeholder="Phone"></div>
+        </div><!-- row -->
+
+        <div class="row row-xs mg-b-10">
+            <div class="col-sm"><input type="email" asp-for="Email" class="form-control" placeholder="Email"></div>
+            <div class="col-sm mg-t-10 mg-sm-t-0"><input type="password" asp-for="PassWord" class="form-control" placeholder="Password"></div>
+        </div><!-- row -->
+
+        <button class="btn btn-primary btn-block btn-signin">Đăng ký</button>
+        @ViewBag.Message
+        <div class="signup-separator"><span>or signup using</span></div>
+
+        <button class="btn btn-facebook btn-block">Sign Up Using Facebook</button>
+        <button class="btn btn-twitter btn-block">Sign Up Using Twitter</button>
+
+        <p class="mg-t-40 mg-b-0">Bạn đã có tài khoảng? <a asp-action="Login">Đăng nhập</a></p>
+    </div><!-- signin-box -->
+</form>
+

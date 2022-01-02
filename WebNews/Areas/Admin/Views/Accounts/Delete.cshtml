@@ -1,0 +1,62 @@
+﻿@model WebNews.Models.Account
+
+@{
+    ViewData["Title"] = "Xóa tài khoảng";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="slim-pageheader">
+    <ol class="breadcrumb slim-breadcrumb">
+        <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Accounts" asp-action="Index">Danh sách quyền truy cập</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Xác nhận xóa quyền truy cập</li>
+    </ol>
+    <h6 class="slim-pagetitle">Xác nhận xóa quyền truy cập</h6>
+</div><!-- slim-pageheader -->
+
+<div class="section-wrapper mg-t-20">
+    <div class="form-layout form-layout-7">
+        <div class="row no-gutters">
+            <div class="col-5 col-sm-4">
+                ID:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8">
+                <input class="form-control" type="text" asp-for="AccountId">
+            </div><!-- col-4 -->
+        </div><!-- form-layout -->
+
+        <div class="row no-gutters">
+            <div class="col-5 col-sm-4">
+                Tên người dùng:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8">
+                <input class="form-control" type="text" asp-for="FullName">
+            </div><!-- col-4 -->
+        </div><!-- form-layout -->
+
+        <div class="row no-gutters">
+            <div class="col-5 col-sm-4">
+                Địa chỉ Email:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8">
+                <input class="form-control" type="text" asp-for="Email">
+            </div><!-- col-4 -->
+        </div><!-- form-layout -->
+
+        <div class="row no-gutters">
+            <div class="col-5 col-sm-4">
+                Quyền truy cập:
+            </div><!-- col-4 -->
+            <div class="col-7 col-sm-8">
+                <input class="form-control" type="text" asp-for="RoleId">
+            </div><!-- col-4 -->
+        </div><!-- form-layout -->
+        <div style="text-align:right !important; margin-top:30px; border-radius:2px" class="form-layout-footer" mg-t-30>
+            <form asp-area="Admin" asp-action="Delete" asp-route-id="@Model.AccountId">
+                <input type="hidden" asp-for="AccountId">
+                <input type="submit" value="Xác nhận xóa" class="btn btn-danger">
+                <a asp-area="Admin" asp-controller="Roles" asp-action="Index" class="btn btn-success bd-0">Quay lại danh sách</a>
+            </form>
+        </div>
+    </div><!-- section-wrapper -->
+</div>

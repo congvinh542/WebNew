@@ -1,0 +1,138 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<WebNews.Models.Post>
+@{
+    ViewData["Title"] = "Quản lý bài đăng";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="slim-pageheader">
+    <ol class="breadcrumb slim-breadcrumb">
+        <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Posts" asp-action="Index">Danh sách bài viết</a></li>
+        <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Posts" asp-action="Create">Tạo mới bài viết</a> </li>
+    </ol>
+    <h6 class="slim-pagetitle">Quản lý bài đăng</h6>
+</div><!-- slim-pageheader -->
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group mg-b-10-force">
+            <select class="form-control select2" id="catID" name="catID" asp-items="@ViewBag.DanhMuc">
+                <option label="LỌC THEO DANH MỤC"></option>
+            </select>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <input class="form-control" placeholder="Tìm kiếm bài viết" type="text" id="keyword" name="keyword" />
+    </div>
+</div>
+<div class="section-wrapper">
+    <div class="table-responsive">
+        <table class="table mg-b-0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Danh mục</th>
+                    <th>Trạng thái</th>
+                    <th>Miêu tả</th>
+                    <th width="30%">Chỉnh sửa</th>
+                </tr>
+            </thead>
+            <tbody id="records_table">
+                @if (Model != null && Model.Count > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        string url = $"/{item.Alias}.html";
+                        <tr>
+                            <th scope="row">@item.PostId</th>
+
+                            <td style="max-width:200px">
+                                <a href="/@url">@item.Title</a>
+                            </td>
+                            @if (item.Cat != null)
+                            {
+                                <td><a href="/@item.Cat.Alias">@item.Cat.CatName</a></td>
+
+                            }
+                            <td>
+                                @if (item.Published == true)
+                                {
+                                    <span class="badge badge-primary">Public</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-primary">NON-Public</span>
+                                }
+                            </td>
+                            <td style="max-width:300px" scope="row">@item.ShortContent</td>
+                            <td>
+                                <a href="@url" target="_blank" class="btn btn-success" style="border-radius:2px">Xem chi tiết</a>
+                                <a asp-area="Admin" asp-controller="Posts" asp-action="Edit" asp-route-id="@item.PostId" class="btn btn-primary" style="border-radius:2px">Chỉnh sửa</a>
+                                <a asp-area="Admin" asp-controller="Posts" asp-action="Delete" asp-route-id="@item.PostId" class="btn btn-danger" style="border-radius:2px">Xóa</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <div aria-label="Page navigation example">
+            <ul class="pagination">
+                <pager class="pager-container" options="@PagedListRenderOptions.Bootstrap4PageNumbersOnly" list="@Model" asp-area="Admin" asp-controller="Post" asp-action="Index"></pager>
+            </ul>
+        </div>
+    </div>
+    <!-- table-responsive -->
+</div>
+<!-- section-wrapper -->
+@section Script{ 
+    <script>
+        $(document).ready(function () {
+            $("#keyword").keyup(function () {
+                var strkeyword = $('#keyword').val();
+                $.ajax({
+                    url: '/Admin/Search/FindBaiViet',
+                    dataType: "json",
+                    type: "POST",
+                    data: { keyword: strkeyword },
+                    async: true,
+                    success: function (results) {
+                        $("#records_table").html("");
+                        $("#records_table").html(results);
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+
+                });
+            });
+
+            jQuery("#catID").change(function () {
+                var _catID = jQuery(this).children(":selected").attr("value");
+                catid = parseFloat(_catID);
+                $('#catID option')
+                    .removeAttr('selected');
+                $("#catID > [value = " + catid + "]").attr("selected", "true");
+
+                $.ajax({
+                    url: '/Admin/Posts/Filtter',
+                    dataType: "json",
+                    type: "GET",
+                    data: {
+                        catID: catid
+                    },
+                    async: true,
+                    success: function (results) {
+                        if (results.status == "success") {
+                            window.location.href = results.redirectUrl;
+                        }
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
+            });
+        });
+    </script>
+}

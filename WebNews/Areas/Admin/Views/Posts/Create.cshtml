@@ -1,0 +1,162 @@
+﻿@model WebNews.Models.Post
+
+@{
+    ViewData["Title"] = "Tạo bài viết";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section Style {
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <link href="~/Admin/lib/select2/css/select2.min.css" rel="stylesheet">
+}
+
+<div class="slim-pageheader">
+    <ol class="breadcrumb slim-breadcrumb">
+        <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Posts" asp-action="Index">Danh sách bài viết</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Tạo mới bài viết</li>
+    </ol>
+    <h6 class="slim-pagetitle">Tạo mới bài viết</h6>
+</div><!-- slim-pageheader -->
+
+<div class="section-wrapper">
+    <div class="form-layout">
+        <form asp-area="Admin" asp-controller="Posts" asp-action="Create" method="post" enctype="multipart/form-data">
+            <div class="row mg-b-25">
+                <div class="col-lg-12">
+                    <div class="form-ground">
+                        <label class="form-control-label">TIÊU ĐỀ: <span class="tx-danger">*</span></label>
+                        <input class="form-control" type="text" asp-for="Title" />
+                    </div>
+                </div>
+                <!--col-4-->
+                <div class="col-lg-12" style="margin:10px 0">
+                    <div class="form-ground">
+                        <label class="form-control-label">MIÊU TẢ NGẮN: <span class="tx-danger">*</span></label>
+                        <input class="form-control" type="text" maxlegend="254" asp-for="ShortContent" />
+                    </div>
+                </div>
+                <!--col-4-->
+                <div class="col-lg-4" style="margin:0 0 10px 0">
+                    <div class="form-ground">
+                        <label class="form-control-label">DANH MỤC: <span class="tx-danger">*</span></label>
+                        <select class="form-control select2" style="height:40px !important" asp-for="CatId" asp-items="@ViewBag.DanhMuc" required>
+                            <option label="DANH MỤC"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-4" style="margin:0 0 10px 0">
+                    <div class="form-ground">
+                        <label class="form-control-label">NGÀY ĐĂNG: <span class="tx-danger">*</span></label>
+                        <input class="form-control" type="datetime-local" asp-for="DateTime" />
+                    </div>
+                </div>
+                <!--col-6-->
+                <div class="col-lg-6">
+                    <div class="form-ground mg-b-10-force">
+                        <label class="form-control-label">ẢNH ĐẠI DIỆN: <span class="tx-danger">*</span></label>
+                        <input class="form-control-file" name="fThumb" type="file" asp-for="Thumb" />
+                    </div>
+                </div>
+                <!--col-12-->
+                <div class="col-lg-12">
+                    <div class="form-ground mg-b-10-force">
+                        <label class="form-control-label">TAGS: <span class="tx-danger">*</span></label>
+                        <input class="form-control" type="text" asp-for="Tags" />
+                    </div>
+                </div>
+                <!--col-12-->
+                <div class="col-lg-12">
+                    <div class="form-ground mg-b-10-force">
+                        <label class="form-control-label">LINKS: <span class="tx-danger">*</span></label>
+                        <input class="form-control" type="text" asp-for="Link" />
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-ground mg-b-10-force">
+                        <label class="form-control-label">Metakey: <span class="tx-danger">*</span></label>
+                        <input class="form-control" type="text" asp-for="MetaKey" />
+                    </div>
+                </div>
+                <!--col-12-->
+                <div class="col-lg-12">
+                    <div class="form-ground mg-b-10-force">
+                        <label class="form-control-label">MetaDec: <span class="tx-danger">*</span></label>
+                        <input class="form-control" type="text" asp-for="MetaDec" />
+                    </div>
+                </div>
+                <!--col-6-->
+                <div class="col-lg-12">
+                    <div class="form-ground mg-b-10-force">
+                        <label class="form-control-label">MÔ TẢ: <span class="tx-danger">*</span></label>
+                        <textarea class="content-editor" asp-for="Content"></textarea>
+                    </div>
+                </div>
+                <!--col-6-->
+                <div class="col-lg-6">
+                    <div class="form-ground">
+                        <label>TRẠNG THÁI</label>
+                        <br />
+                        <input type="checkbox" asp-for="Published"><span> Published </span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-ground mg-b-10-force">
+                        <input type="checkbox" asp-for="IsHot"><span> IsHot</span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-ground mg-b-10-force">
+                        <input type="checkbox" asp-for="IsNewfeed"><span> IsNewfeed</span>
+                    </div>
+                </div>
+
+            </div>
+            <!--row-->
+
+            <div style="text-align:center !important" class="form-layout-footer">
+                <button class="btn btn-primary bd-0">Đăng bài</button>
+                <button class="btn btn-secondary bd-0">Cancel</button>
+            </div><!-- form-layout-footer -->
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script href="~/Admin/lib/select2/js/select2.min.css" rel="stylesheet"></script>    
+    <script>
+        $(document).ready(function () {
+            $(".content-editor").summernote({
+                height: 300,
+                minHeight: null,
+                maxHeight: null,
+                codemirror: {
+                    theme: "monokai"
+                },
+                callbacks: {
+                    onImageUpload: function (files) {
+                        for (var i = 0; i < files.length; i++) {
+
+                            uploadImage(files[i]);
+                        }
+                    }
+                },
+                fontSizes: ['12', '14', '16', '18', '24', '36', '48'],
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['fontname', ['fontname']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']],
+                ],
+            });
+        });
+    </script>
+}
