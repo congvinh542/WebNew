@@ -7,6 +7,11 @@ namespace WebNews.Models
 {
     public partial class Post
     {
+        public Post()
+        {
+            Comments = new HashSet<Comment>();
+        }
+
         public int PostId { get; set; }
         public string Title { get; set; }
         public string ShortContent { get; set; }
@@ -28,5 +33,6 @@ namespace WebNews.Models
 
         public virtual Account Account { get; set; }
         public virtual Category Cat { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

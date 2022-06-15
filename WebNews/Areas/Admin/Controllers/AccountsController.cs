@@ -276,7 +276,7 @@ namespace WebNews.Areas.Admin.Controllers
             {
                 account.LastLogin = null;
                 account.Salt = Utilities.GetRandomKey();
-                var passwordMD5 = (account.PassWord.Trim() + account.Salt.Trim()).ToMD5();
+                var passwordMD5 = (account.PassWord + account.Salt).ToMD5();
                 account.PassWord = passwordMD5;
                 account.CreateDate = DateTime.Now;
                 if (fThumb != null)
@@ -327,7 +327,10 @@ namespace WebNews.Areas.Admin.Controllers
             {
                 try
                 {
-
+                    account.LastLogin = null;
+                    account.Salt = Utilities.GetRandomKey();
+                    var passwordMD5 = (account.PassWord + account.Salt).ToMD5();
+                    account.PassWord = passwordMD5;
                     _context.Update(account);
                     await _context.SaveChangesAsync();
                 }

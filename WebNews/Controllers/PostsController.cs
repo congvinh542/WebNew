@@ -32,7 +32,7 @@ namespace WebNews.Controllers
             var pageNumber = page == null || page <= 0 ? 1 : page.Value;
             var pageSzie = Utilities.PAGE_SIZE2;
             List<Post> lsPost = new List<Post>();
-
+            List<Account> lsAccount = new List<Account>();
             if (!string.IsNullOrEmpty(Alias))
             {
                 lsPost = _context.Posts.Include(x => x.Cat)
@@ -57,7 +57,7 @@ namespace WebNews.Controllers
             ViewBag.DanhMuc = danhmuc;
             return View(models);
         }
-
+            
         // GET: Posts/Details/5
         [Route("/{Alias}.html", Name = "PostDetails")]
         public async Task<IActionResult> Details(string Alias)

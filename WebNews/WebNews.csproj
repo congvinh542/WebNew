@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Views\Shared\Components\NavView\" />
     <Folder Include="wwwroot\Admin\lib\echarts\extension\" />
     <Folder Include="wwwroot\Admin\lib\summernote\lang\" />
     <Folder Include="wwwroot\images\categories\" />

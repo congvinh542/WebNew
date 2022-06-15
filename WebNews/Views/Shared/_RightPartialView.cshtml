@@ -3,7 +3,7 @@
     <!-- widget about -->
     <div class="widget rounded">
         <div class="widget-about data-bg-image text-center" data-bg-image="images/map-bg.png">
-            <img src="~/images/logo.svg" alt="logo" class="mb-4" />
+            <img src="~/HomePage/images/logo.svg" alt="logo" class="mb-4" />
             <p class="mb-4">Hello, We’re content writer who is fascinated by content fashion, celebrity and lifestyle. We helps clients bring the right content to the right people.</p>
             <ul class="social-icons list-unstyled list-inline mb-0">
                 <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
@@ -17,13 +17,14 @@
     </div>
 
     <!-- widget popular posts -->
+    <!-- widget popular posts -->
     @await Component.InvokeAsync("Popular")
 
     <!-- widget categories -->
 <div class="widget rounded">
     <div class="widget-header text-center">
         <h3 class="widget-title">Explore Topics</h3>
-        <img src="~/images/wave.svg" class="wave" alt="wave" />
+        <img src="~/HomePage/images/wave.svg" class="wave" alt="wave" />
     </div>
     @await Component.InvokeAsync("Categories")
 
@@ -33,7 +34,7 @@
     <div class="widget no-container rounded text-md-center">
         <span class="ads-title">- Sponsored Ad -</span>
         <a href="#" class="widget-ads">
-            <img src="~/images/ads/ad-360.png" alt="Advertisement" />
+            <img src="~/HomePage/images/ads/ad-360.png" alt="Advertisement" />
         </a>
     </div>
 
@@ -41,7 +42,7 @@
     <div class="widget rounded">
         <div class="widget-header text-center">
             <h3 class="widget-title">Tag Clouds</h3>
-            <img src="images/wave.svg" class="wave" alt="wave" />
+            <img src="~/HomePage/images/wave.svg" class="wave" alt="wave" />
         </div>
         <div class="widget-content">
             <a href="#" class="tag">#Trending</a>

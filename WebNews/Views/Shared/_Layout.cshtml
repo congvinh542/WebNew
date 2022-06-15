@@ -95,6 +95,7 @@
                                 <span class="burger-icon"></span>
                             </button>
                         </div>
+
                     </div>
                 </div>
             </nav>
@@ -165,16 +166,19 @@
         <nav>
             <ul class="vertical-menu">
                 <li class="active">
-                    <a href="/">Home</a>
+                    <a href="/"><i class="icon-home"></i> Home</a>
                 </li>
                 <li>
-                    <a href="#">Pages</a>
+                    <a href="#"><i class="icon-notebook"></i> Pages</a>
                     @await Component.InvokeAsync("NavMobi")
                 </li>
-                <li><a href="/lien-he.html">Liên hệ</a></li>
-                 <li class="nav-item active">
-                       <a asp-area="Admin" asp-controller="Home" asp-action="Indexs">Home Admin</a>
-                  </li>
+                <li><a href="/lien-he.html"><i class="icon-call-in"></i> Liên hệ</a></li>
+                <li class="nav-item active">
+                    <a asp-area="Admin" asp-controller="Home" asp-action="Indexs"><i class="icon-user-following"></i> Home Admin</a>
+                </li>
+                <li class="active">
+                    <a href="/"><i class="icon-login"></i> Đăng Nhập</a>
+                </li>
             </ul>
         </nav>
         <!-- social icons -->
